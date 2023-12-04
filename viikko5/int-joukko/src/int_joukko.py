@@ -21,8 +21,6 @@ class IntJoukko:
         self.listan_pituus = 0
 
     def kuuluu(self, lisattava_luku):
-        on = 0
-
         for luku in self.listajono:
             if luku == lisattava_luku:
                 return True
@@ -36,20 +34,14 @@ class IntJoukko:
             self.listajono[0] = lisattava_luku
             self.listan_pituus = self.listan_pituus + 1
             return True
-        else:
-            pass
 
         if not self.kuuluu(lisattava_luku):
             self.listajono[self.listan_pituus] = lisattava_luku
             self.listan_pituus = self.listan_pituus + 1
 
             # ei mahdu enempää, luodaan uusi säilytyspaikka luvuille
-            if self.listan_pituus % len(self.listajono) == 0:
-                taulukko_old = self.listajono
-                self.kopioi_lista(self.listajono, taulukko_old)
-                self.listajono = self._luo_lista(
-                    self.listan_pituus + self.kasvatuskoko)
-                self.kopioi_lista(taulukko_old, self.listajono)
+            if self.listan_pituus == len(self.listajono):
+                self.luo_lisaa_tilaa()
 
             return True
 
@@ -75,6 +67,17 @@ class IntJoukko:
             return True
 
         return False
+
+    def luo_lisaa_tilaa(self):
+        # taulukko_old = self.listajono
+        # self.kopioi_lista(self.listajono, taulukko_old)
+        # self.listajono = self._luo_lista(
+        #     self.listan_pituus + self.kasvatuskoko)
+        # self.kopioi_lista(taulukko_old, self.listajono)
+        arvot_talteen = self._luo_lista(self.listan_pituus)
+        self.kopioi_lista(arvot_talteen, self.listajono)
+        self.listajono = self.kopioi_lista(
+            arvot_talteen, self._luo_lista(self.listan_pituus + self.kasvatuskoko))
 
     def kopioi_lista(self, a, b):
         for i in range(0, len(a)):
