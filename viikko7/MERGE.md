@@ -1,1 +1,1 @@
-https://github.com/eepek/miniprojekti/pull/14
+[Pull request merge, miniprojekti](https://github.com/eepek/miniprojekti/pull/14)
